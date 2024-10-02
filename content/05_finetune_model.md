@@ -1,2 +1,2 @@
-# Bonus: Fine-tuning Loghi
+# Fine-tuning Loghi
 

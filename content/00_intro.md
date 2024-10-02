@@ -18,3 +18,7 @@ This lesson is based on the following scenario:
 
 > We have acquired new handwritten documents, from a writer that is not represented in our initial dataset. In order to reduce the amount of manual transcription work, we want to leverage the previously trained model, to obtain sufficiently precise transcriptions of our new images. 
 
+(lesson-material)=
+## Lesson Material 
+
+The lesson material can be downloaded from [here](https://drive.google.com/file/d/1VgRbI2ofRtnvZ1_FfBBtbr5yz1dmXL1o/view?usp=sharing). 
