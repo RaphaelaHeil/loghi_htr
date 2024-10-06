@@ -13,11 +13,11 @@ The material provides a general introduction to ATR and does not assume prior ex
 ```
 
 
+
 ```{toctree}
 :maxdepth: 1
 :caption: The lesson
 00_intro.md
-01_atr_intro.md
 02_loghi_docker_setup.md
 03_pre-trained_model.md
 04_create_train_data.md
@@ -27,14 +27,5 @@ The material provides a general introduction to ATR and does not assume prior ex
 ```{toctree}
 :maxdepth: 1
 :caption: Material
-material_docker.md
 material_shell.md
-material_further_reading.md
-```
-
-```{toctree}
-:maxdepth: 1
-:caption: Appendix
-instructor_notes.md
-appendix_scripts.md
 ```
