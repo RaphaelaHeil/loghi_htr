@@ -1,3 +1,5 @@
-sphinx_rtd_theme
+sphinx
+myst-parser
+sphinx-rtd-theme
 sphinx-lesson
 sphinx_rtd_theme_ext_color_contrast
