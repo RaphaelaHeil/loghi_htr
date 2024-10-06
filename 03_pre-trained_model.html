@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using a Pre-Trained Model to Recognise Text &mdash; Local Automatic Text Recognition with Loghi 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_lesson.css?v=0c089442" />
+      <link rel="stylesheet" type="text/css" href="_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/minipres.js?v=a0d29692"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Creating Training Data from Existing Annotations" href="04_create_train_data.html" />
+    <link rel="prev" title="Setting Up Loghi with Docker" href="02_loghi_docker_setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Local Automatic Text Recognition with Loghi
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">General Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_loghi_docker_setup.html">Setting Up Loghi with Docker</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using a Pre-Trained Model to Recognise Text</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modifying-inference-pipeline-sh">Modifying <code class="docutils literal notranslate"><span class="pre">inference-pipeline.sh</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-inference-pipeline-sh">Running <code class="docutils literal notranslate"><span class="pre">inference-pipeline.sh</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="04_create_train_data.html">Creating Training Data from Existing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_finetune_model.html">Fine-Tuning a Small Custom Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Material</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="material_shell.html">Unix Shell Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Local Automatic Text Recognition with Loghi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Using a Pre-Trained Model to Recognise Text</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/03_pre-trained_model.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-a-pre-trained-model-to-recognise-text">
+<h1>Using a Pre-Trained Model to Recognise Text<a class="headerlink" href="#using-a-pre-trained-model-to-recognise-text" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<p>Learn how to use a trained model to recognise text in new images.</p>
+</div>
+<div class="admonition-prerequisites prerequisites admonition" id="prerequisites-0">
+<p class="admonition-title">Prerequisites</p>
+<ul class="simple">
+<li><p>images that you wish to recognise</p></li>
+<li><p>a pre-trained text recognition model</p></li>
+<li><p>a pre-trained segmentation model, or existing line segmentations for your new images, in PAGE XML format</p></li>
+<li><p>the script <code class="docutils literal notranslate"><span class="pre">inference-pipeline.sh</span></code></p></li>
+</ul>
+</div>
+<section id="modifying-inference-pipeline-sh">
+<h2>Modifying <code class="docutils literal notranslate"><span class="pre">inference-pipeline.sh</span></code><a class="headerlink" href="#modifying-inference-pipeline-sh" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Open the file <code class="docutils literal notranslate"><span class="pre">inference-pipeline.sh</span></code> in a text editor of your choice</p></li>
+<li><p>If you already have line segmentations (in PAGE XML) that you would like to use to recognise text lines, change line 11 from <code class="docutils literal notranslate"><span class="pre">BASELINELAYPA=1</span></code> to <code class="docutils literal notranslate"><span class="pre">BASELINELAYPA=0</span></code></p></li>
+<li><p>If your data is not segmented yet, modify lines 15 and 16, so that they contain the <strong>absolute</strong> paths to the segmentation model files, i.e.</p>
+<ul class="simple">
+<li><p>the configuration (a file ending in <code class="docutils literal notranslate"><span class="pre">.yaml</span></code>)</p></li>
+<li><p>model checkpoint (a file ending in <code class="docutils literal notranslate"><span class="pre">.pth</span></code>),</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">15</span><span class="nv">LAYPABASELINEMODEL</span><span class="o">=</span>/home/demo/loghi_material/segmentation_model/config.yaml
+<span class="linenos">16</span><span class="nv">LAYPABASELINEMODELWEIGHTS</span><span class="o">=</span>/home/demo/loghi_material/segmentation_model/model_best_mIoU.pth
+</pre></div>
+</div>
+</li>
+<li><p>If you have a Laypa <strong>region</strong> model, instead of a Laypa <strong>baseline</strong> model, set <code class="docutils literal notranslate"><span class="pre">BASELINELAYPA=0</span></code> and <code class="docutils literal notranslate"><span class="pre">REGIONLAYPA=1</span></code> and modify lines 19 and 20 as described in the previous step.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">19</span><span class="nv">LAYPAREGIONMODEL</span><span class="o">=</span>/home/demo/loghi_material/segmentation_model/config.yaml
+<span class="linenos">20</span><span class="nv">LAYPAREGIONMODELWEIGHTS</span><span class="o">=</span>/home/demo/loghi_material/segmentation_model/model_best_mIoU.pth
+</pre></div>
+</div>
+</li>
+<li><p>Modify line 25, so that it points to the directory in which the text recognition model is stored</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">25</span><span class="nv">HTRLOGHIMODEL</span><span class="o">=</span>/home/demo/loghi_material/ibsen_model/best_val
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure that the path points to the innermost directory in the tree, here <code class="docutils literal notranslate"><span class="pre">best_val</span></code>. If you are uncertain, check that the directory contains a file called <code class="docutils literal notranslate"><span class="pre">model.keras</span></code>, as well as the files <code class="docutils literal notranslate"><span class="pre">charlist.txt</span></code>, and <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</p>
+</div>
+</li>
+<li><p>On line 26, change the model name. This value will be used as the name of the directory in which the recognition results are placed. It should therefore contain some reference to which model was used. Sensible choices are:</p>
+<ul class="simple">
+<li><p>the actual name of your model, which can for example be found in the model’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code></p></li>
+<li><p>an entirely different name of your choosing, as long as it <strong>does not</strong> contain any spaces!</p></li>
+</ul>
+</li>
+<li><p>If your computer does not have a GPU, or Loghi reports issues in using it, set line 45 to -1: <code class="docutils literal notranslate"><span class="pre">GPU=-1</span></code></p></li>
+</ol>
+<p>Feel free to experiment with the settings in lines 30 - 43 but note the comments in the file about the purpose and limitations of these values!</p>
+</section>
+<section id="running-inference-pipeline-sh">
+<h2>Running <code class="docutils literal notranslate"><span class="pre">inference-pipeline.sh</span></code><a class="headerlink" href="#running-inference-pipeline-sh" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><a class="reference internal" href="material_shell.html#open-shell"><span class="std std-ref">Open a new shell</span></a></p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">cd</span></code>, navigate to the location of <code class="docutils literal notranslate"><span class="pre">inference-pipeline.sh</span></code></p></li>
+<li><p>Execute the script by running <code class="docutils literal notranslate"><span class="pre">./inference-pipeline.sh</span> <span class="pre">PATH_TO_DATASET</span></code>, where <code class="docutils literal notranslate"><span class="pre">PATH_TO_DATASET</span></code> is the path to the directory containing your images, e.g.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./inference-pipeline.sh<span class="w"> </span>/home/demo/loghi_material/bonnevie_images/test
+</pre></div>
+</div>
+<p>if your system reports <code class="docutils literal notranslate"><span class="pre">permission</span> <span class="pre">denied:</span> <span class="pre">./inference-pipeline.sh</span></code>, run <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">755</span> <span class="pre">inference-pipeline.sh</span></code> to make the script executable, and try running it again</p>
+</li>
+</ol>
+<div class="admonition-exercise exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercise</p>
+<p>If you are using the provided material to follow this lesson, enter the path to the Bonnevie test images, as indicated above (<code class="docutils literal notranslate"><span class="pre">.../bonnevie_images/test</span></code>).</p>
+</div>
+<p>Once you have started the <code class="docutils literal notranslate"><span class="pre">inference-pipeline</span></code> script, Loghi will start to process all of the images in the specified directory. If you have configured a Laypa segmentation model, the script will begin by recognising and refining text lines in the images. Loghi will write a variety of log messages to the command-line, allowing you to follow the progress. Eventually, the actual text recognition will commence, indicated by the phrase <code class="docutils literal notranslate"><span class="pre">Running</span> <span class="pre">HTR</span></code>. After presenting pieces of information about the model, e.g. the architecture and the character set it was trained on, each line in each of the images will be processed individually. Loghi will log the individual transcriptions, and store them as PAGE XML in the dataset folder.</p>
+<p>To inspect the created PAGE XML files, navigate into your dataset directory and into the folder with the name that you chose for the field <code class="docutils literal notranslate"><span class="pre">modelname</span></code> in an earlier step. Each of the xml files corresponds to the recognised text in the image with the same name.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="02_loghi_docker_setup.html" class="btn btn-neutral float-left" title="Setting Up Loghi with Docker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="04_create_train_data.html" class="btn btn-neutral float-right" title="Creating Training Data from Existing Annotations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raphaela Heil.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

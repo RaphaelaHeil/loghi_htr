@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Training a Model from Scratch &mdash; Local Automatic Text Recognition with Loghi 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_lesson.css?v=0c089442" />
+      <link rel="stylesheet" type="text/css" href="_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/minipres.js?v=a0d29692"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Local Automatic Text Recognition with Loghi
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">General Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_loghi_docker_setup.html">Setting Up Loghi with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_pre-trained_model.html">Using a Pre-Trained Model to Recognise Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_create_train_data.html">Creating Training Data from Existing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_finetune_model.html">Fine-Tuning a Small Custom Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Material</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="material_shell.html">Unix Shell Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Local Automatic Text Recognition with Loghi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Training a Model from Scratch</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/06_training_from_scratch.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="training-a-model-from-scratch">
+<h1>Training a Model from Scratch<a class="headerlink" href="#training-a-model-from-scratch" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<p>Learn how to <em>fine-tune</em> an existing text recognition model, …</p>
+</div>
+<div class="admonition-prerequisites prerequisites admonition" id="prerequisites-0">
+<p class="admonition-title">Prerequisites</p>
+<ul class="simple">
+<li><p>script <code class="docutils literal notranslate"><span class="pre">finetune.sh</span></code></p></li>
+<li><p>path to pre-trained model checkpoint</p></li>
+<li><p>path to fine-tuning data</p>
+<ul>
+<li><p>arranged according to Loghi’s data format (cf <a class="reference internal" href="04_create_train_data.html"><span class="doc std std-doc">Creating training data from existing annotations</span></a>)</p></li>
+</ul>
+</li>
+<li><p>path to output directory for the fine-tuned model</p></li>
+</ul>
+</div>
+<div class="admonition-exercise exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercise</p>
+<p>Use the data, provided in …, and the pre-trained model checkpoint <code class="docutils literal notranslate"><span class="pre">name</span></code>, included in the lesson material to fine-tune the Ibsen model on Bonnevie’s handwriting. Afterwards, use the newly trained model to recognise the handwriting in the test set and compare the new results with the ones you obtained using the Ibsen model, in step <a class="reference internal" href="03_pre-trained_model.html"><span class="doc std std-doc">Using a pre-trained model</span></a>.</p>
+</div>
+<section id="modifying-finetune-sh">
+<h2>Modifying <code class="docutils literal notranslate"><span class="pre">finetune.sh</span></code><a class="headerlink" href="#modifying-finetune-sh" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Open the file <code class="docutils literal notranslate"><span class="pre">finetune.sh</span></code> in a text editor of your choice</p></li>
+<li><p>Modify line 12 and fill in the path to the directory, containing your pre-trained model, e.g.:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">12</span><span class="nv">HTRBASEMODEL</span><span class="o">=</span>/home/demo/.../ibsen_small_8_30/best_val
+</pre></div>
+</div>
+</li>
+<li><p>If your computer does not have a GPU, or Loghi reports issues in using it, set line 22 to -1</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">22</span><span class="nv">GPU</span><span class="o">=</span>-1
+</pre></div>
+</div>
+</li>
+<li><p>…</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">25</span><span class="nv">listdir</span><span class="o">=</span>/mnt/d/data/oslo_data/bonnevie_train_val
+<span class="linenos">26</span><span class="nv">trainlist</span><span class="o">=</span><span class="nv">$listdir</span>/training_all_train.txt
+<span class="linenos">27</span><span class="nv">validationlist</span><span class="o">=</span><span class="nv">$listdir</span>/training_all_val.txt
+</pre></div>
+</div>
+</li>
+<li><p>…</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">45</span><span class="nv">batch_size</span><span class="o">=</span><span class="m">8</span>
+<span class="linenos">46</span><span class="nv">model_name</span><span class="o">=</span>bonnevie_small_8_30
+<span class="linenos">47</span><span class="nv">learning_rate</span><span class="o">=</span><span class="m">0</span>.0003
+</pre></div>
+</div>
+</li>
+<li><p>…</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">52</span><span class="nv">outputdir</span><span class="o">=</span>/mnt/d/data/oslo_data/<span class="nv">$model_name</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="running-finetune-sh">
+<h2>Running <code class="docutils literal notranslate"><span class="pre">finetune.sh</span></code><a class="headerlink" href="#running-finetune-sh" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>In your shell, navigate to the location of <code class="docutils literal notranslate"><span class="pre">finetune.sh</span></code></p></li>
+<li><p>Execute the script by running <code class="docutils literal notranslate"><span class="pre">./finetune.sh</span></code></p>
+<ul class="simple">
+<li><p>if your system reports <code class="docutils literal notranslate"><span class="pre">permission</span> <span class="pre">denied:</span> <span class="pre">./finetune.sh</span></code>, run <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">755</span> <span class="pre">finetune.sh</span></code> to make the script executable, and try running it again</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="inspecting-the-output">
+<h2>Inspecting the Output<a class="headerlink" href="#inspecting-the-output" title="Link to this heading"></a></h2>
+<section id="command-line-messages">
+<h3>Command-line messages<a class="headerlink" href="#command-line-messages" title="Link to this heading"></a></h3>
+<p>There will be a lot of log messages …. the most relevant ones are the ones providing updates on the fine-tuning and validation progress:
+…</p>
+</section>
+<section id="id1">
+<h3><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+</section>
+</section>
+<section id="using-the-fine-tuned-model">
+<h2>Using the Fine-tuned Model<a class="headerlink" href="#using-the-fine-tuned-model" title="Link to this heading"></a></h2>
+<p>…</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raphaela Heil.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setting Up Loghi with Docker &mdash; Local Automatic Text Recognition with Loghi 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_lesson.css?v=0c089442" />
+      <link rel="stylesheet" type="text/css" href="_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/minipres.js?v=a0d29692"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using a Pre-Trained Model to Recognise Text" href="03_pre-trained_model.html" />
+    <link rel="prev" title="General Introduction" href="00_intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Local Automatic Text Recognition with Loghi
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">General Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting Up Loghi with Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-the-docker-containers">Downloading the docker containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#locating-relevant-files">Locating Relevant Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#macos">MacOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux">Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_pre-trained_model.html">Using a Pre-Trained Model to Recognise Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_create_train_data.html">Creating Training Data from Existing Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_finetune_model.html">Fine-Tuning a Small Custom Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Material</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="material_shell.html">Unix Shell Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Local Automatic Text Recognition with Loghi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Setting Up Loghi with Docker</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/02_loghi_docker_setup.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setting-up-loghi-with-docker">
+<h1>Setting Up Loghi with Docker<a class="headerlink" href="#setting-up-loghi-with-docker" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Download the required Docker images.</p></li>
+<li><p>Locate all of the files, required for subsequent lessons.</p></li>
+</ul>
+</div>
+<div class="admonition-prerequisites prerequisites admonition" id="prerequisites-0">
+<p class="admonition-title">Prerequisites</p>
+<p>Make sure that you have downloaded and unzipped the <a class="reference internal" href="00_intro.html#lesson-material"><span class="std std-ref">Lesson Material</span></a>, and know where it is currently stored (e.g. in your <code class="docutils literal notranslate"><span class="pre">Downloads</span></code> folder).</p>
+</div>
+<section id="downloading-the-docker-containers">
+<h2>Downloading the docker containers<a class="headerlink" href="#downloading-the-docker-containers" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Open the file <code class="docutils literal notranslate"><span class="pre">htr-train-pipeline.sh</span></code> in the lesson material</p></li>
+<li><p>Note down the version number that is specified on line 2. It is typically in the format of three numbers, separated by dots, e.g.: <code class="docutils literal notranslate"><span class="pre">2.1.2</span></code>. Alternatively, <code class="docutils literal notranslate"><span class="pre">latest</span></code> may be stated</p></li>
+<li><p>One by one, download the three Loghi components by executing the respective command below. Replace <code class="docutils literal notranslate"><span class="pre">VERSION</span></code>with the number that you identified in the previous step:</p>
+<ol class="arabic">
+<li><p>Loghi’s layout analysis tool <code class="docutils literal notranslate"><span class="pre">Laypa</span></code>:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">loghi/docker.laypa:VERSION</span></code></p>
+</div></blockquote>
+<blockquote>
+<div><p>e.g. <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">loghi/docker.laypa:2.1.2</span></code></p>
+</div></blockquote>
+</li>
+<li><p>Loghi’s core HTR functionality:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">loghi/docker.htr:VERSION</span></code></p>
+</div></blockquote>
+<blockquote>
+<div><p>e.g. <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">loghi/docker.htr:2.1.2</span></code></p>
+</div></blockquote>
+</li>
+<li><p>Miscellaneous related tools:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">loghi/docker.loghi-tooling</span></code></p>
+</div></blockquote>
+<blockquote>
+<div><p>e.g. <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">loghi/docker.htr-tooling:2.1.2</span></code></p>
+</div></blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have previously worked with Loghi, you can check which components and versions are installed by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code>.</p>
+<p>To filter the list, e.g. if you have downloaded many other images, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>images<span class="w"> </span>-f<span class="w"> </span><span class="nv">reference</span><span class="o">=</span><span class="s1">&#39;loghi/*&#39;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="locating-relevant-files">
+<h2>Locating Relevant Files<a class="headerlink" href="#locating-relevant-files" title="Link to this heading"></a></h2>
+<p>There are several file and directory paths that are needed while working with Loghi. This includes the scripts to run the toolsuite, the data (images, transcriptions), and potentially pre-trained models. If you are working with the provided workshop material, place the extracted files in a location as described below, depending on your operating system.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please note that issues may occur if your paths contain spaces, such as:</p>
+<p><code class="docutils literal notranslate"><span class="pre">/home/user/test</span> <span class="pre">folder/a</span> <span class="pre">file</span> <span class="pre">name.png</span></code></p>
+<p>In general, it is not advisable to use spaces in file oder directory names at all. If you would like to create a visual separation between words, you can for example use an underscore:</p>
+<p><code class="docutils literal notranslate"><span class="pre">/home/user/test_folder/a_file_name.png</span></code></p>
+</div>
+<p>It may be useful to create a text file, in which you can collect all of the different paths, so that you can copy from it for each of the different steps. Concretely, you will need:</p>
+<ul>
+<li><p>path to the directory containing the workshop material (most of the paths below will lie within this directory)</p></li>
+<li><p>path to the Loghi scripts</p>
+<ul class="simple">
+<li><p>create-train-data.sh</p></li>
+<li><p>htr-train-pipeline.sh</p></li>
+<li><p>inference-pipeline.sh</p></li>
+<li><p>finetune.sh</p></li>
+</ul>
+</li>
+<li><p>path to the directory containing the training data, consisting of:</p>
+<ul>
+<li><p>the image files</p></li>
+<li><p>a subdirectory called “page”, which contains the corresponding transcriptions in PAGE XML format</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that an image and its corresponding transcription file have to have the same name, e.g. <code class="docutils literal notranslate"><span class="pre">.../doc_page01.png</span></code> and <code class="docutils literal notranslate"><span class="pre">.../page/doc_page01.xml</span></code> (where <code class="docutils literal notranslate"><span class="pre">...</span></code> is the path to the training data)</p>
+</div>
+</li>
+</ul>
+</li>
+<li><p>path to the directory in which to place the reformatted training data</p></li>
+<li><p>path to the directory(ies) containing any other datasets, for example for the evaluation or for recognising new document images</p></li>
+<li><p>path to the directory in which to place the newly created text recognition model</p></li>
+<li><p>path to the directory containing an already trained text recognition model</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that by default, Loghi places new model files in a subdirectory called <code class="docutils literal notranslate"><span class="pre">best_val</span></code>, your path should therefore generally look like: <code class="docutils literal notranslate"><span class="pre">.../modelname/best_val/</span></code></p>
+</div>
+</li>
+<li><p>path to the directory containing a pre-trained Laypa segmentation model</p></li>
+</ul>
+<section id="macos">
+<h3>MacOS<a class="headerlink" href="#macos" title="Link to this heading"></a></h3>
+<p>You can place the files in a location that is convenient to you. File paths can be copied by highlighting the file or folder in the Mac Finder and either:</p>
+<ul class="simple">
+<li><p>pressing <code class="docutils literal notranslate"><span class="pre">Command</span></code> + <code class="docutils literal notranslate"><span class="pre">Option</span></code> + <code class="docutils literal notranslate"><span class="pre">C</span></code></p></li>
+<li><p>or by right-clicking the file/folder, holding the <code class="docutils literal notranslate"><span class="pre">Option</span></code> key to reveal the menu item <code class="docutils literal notranslate"><span class="pre">Copy</span> <span class="pre">...</span> <span class="pre">as</span> <span class="pre">Pathname</span></code> and clicking that option</p></li>
+</ul>
+</section>
+<section id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Link to this heading"></a></h3>
+<p>You can place the files in a location that is convenient to you. In order to copy a file path on linux, highlight the file/folder and press <code class="docutils literal notranslate"><span class="pre">Ctrl</span></code> + <code class="docutils literal notranslate"><span class="pre">C</span></code>, or rightclick and choose <code class="docutils literal notranslate"><span class="pre">Copy</span></code>. When you paste the copied value in a text editor or command-line, the absolute path will be pasted automatically, instead of the actual file.</p>
+</section>
+<section id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading"></a></h3>
+<div class="admonition-prerequisites prerequisites admonition" id="prerequisites-1">
+<p class="admonition-title">Prerequisites</p>
+<p>If you have not intereacted with the WSL before, open the <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">Prompt</span></code> or <code class="docutils literal notranslate"><span class="pre">PowerShell</span></code>, type <code class="docutils literal notranslate"><span class="pre">wsl</span></code> and press <code class="docutils literal notranslate"><span class="pre">Enter</span></code>. You will then be prompted to choose a username and password, to complete the WSL setup.</p>
+</div>
+<p>On Windows, it will be easiest if you place your data within the folder structure of the Windows Subsystem for Linux (WSL), as described below. If this is not an option for you, <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/wsl2-mount-disk">this article</a> may be an alternative for you instead.</p>
+<ol class="arabic simple">
+<li><p>Open a File Explorer</p></li>
+<li><p>Click into the address bar, to make it editable, enter <code class="docutils literal notranslate"><span class="pre">\\wsl$</span></code>, and press <code class="docutils literal notranslate"><span class="pre">Enter</span></code></p>
+<ul class="simple">
+<li><p>if this does not work, try entering <code class="docutils literal notranslate"><span class="pre">\\wsl.localhost</span></code> instead</p></li>
+</ul>
+</li>
+<li><p>In the displayed list, double-click on the Linux distribution that you chose during the WSL installation. If you did not pick a specific distribution, Ubuntu (followed by a version number, such as 22.04) has very likely been configured as the default</p></li>
+<li><p>Open the directory <code class="docutils literal notranslate"><span class="pre">home</span></code>, which should contain a directory with the username you chose during the WSL setup. You are free to place your files anywhere within this directory (i.e. within <code class="docutils literal notranslate"><span class="pre">/home/username</span></code>).</p></li>
+</ol>
+<p>To obtain paths within WSL, you can e.g.:</p>
+<ul class="simple">
+<li><p>for directories: use the shell (command <code class="docutils literal notranslate"><span class="pre">cd</span></code>) to navigate into the directory and run <code class="docutils literal notranslate"><span class="pre">pwd</span></code></p></li>
+<li><p>for files: navigate to where the file is located and run <code class="docutils literal notranslate"><span class="pre">readlink</span> <span class="pre">-f</span> <span class="pre">FILENAME</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">readlink</span> <span class="pre">-f</span> <span class="pre">test.png</span></code></p></li>
+<li><p>install the file manager Nautilus (<a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps#install-nautilus">instructions</a>) and open it by looking for the name of your Linux distribution (default: Ubuntu) in the <em>Windows</em> start menu and choosing the app <code class="docutils literal notranslate"><span class="pre">Files</span></code>, in the submenu. In the Nautilus file manager, follow the Linux instructions, described above.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="00_intro.html" class="btn btn-neutral float-left" title="General Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="03_pre-trained_model.html" class="btn btn-neutral float-right" title="Using a Pre-Trained Model to Recognise Text" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raphaela Heil.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
