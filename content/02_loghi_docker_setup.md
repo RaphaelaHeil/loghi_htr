@@ -29,7 +29,7 @@ Make sure that you have downloaded and unzipped the [Lesson Material](lesson-mat
     5. Miscellaneous related tools: 
         > `docker pull loghi/docker.loghi-tooling`
 
-        > e.g. `docker pull loghi/docker.htr-tooling:2.1.2`
+        > e.g. `docker pull loghi/docker.loghi-tooling:2.1.2`
 
 ````{note}
 If you have previously worked with Loghi, you can check which components and versions are installed by running `docker images`. 
